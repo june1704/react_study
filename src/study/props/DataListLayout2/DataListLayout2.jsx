@@ -1,12 +1,11 @@
-function DataListLayout2({ dataList }) {
-
+function DataListLayout2( { dataList } ) {
     return <ul>
         {
             dataList.map((a, index) =>
                 <li key={index}>{a}</li>
             )
         }
-    </ul>;
+    </ul>
 }
 
 export default DataListLayout2;
