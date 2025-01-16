@@ -72,28 +72,35 @@ function App7(props) {
             <h1>도서 정보 등록 및 조회</h1>
             <div>
                 <label htmlFor="">도서명:</label>
-                <input type="text" name="title" placeholder="도서명 검색" onChange={handleSearchOnChange} value={search.title} />
+                <input type="text" name="title" placeholder="도서명 검색"
+                onChange={handleSearchOnChange} value={search.title} />
             </div>
             <div>
                 <label htmlFor="">저자명</label>
-                <input type="text" name="author" placeholder="저자명 검색" onChange={handleSearchOnChange} value={search.author} />
+                <input type="text" name="author" placeholder="저자명 검색"
+                onChange={handleSearchOnChange} value={search.author} />
             </div>
             <div>
                 <label htmlFor="">출판사명</label>
-                <input type="text" name="publisher" placeholder="출판사명 검색" onChange={handleSearchOnChange} value={search.publisher} />
+                <input type="text" name="publisher" placeholder="출판사명 검색"
+                onChange={handleSearchOnChange} value={search.publisher} />
             </div>
             <button onClick={handleSearchOnClick}>도서조회</button>
+
             <div>
                 <label htmlFor="title">도서명: </label>
-                <input type="text" name="title" onChange={handleOnChange} value={book.title} />
+                <input type="text" name="title" onChange={handleOnChange}
+                value={book.title} />
             </div>
             <div>
                 <label htmlFor="author">저자명: </label>
-                <input type="text" name="author" onChange={handleOnChange} value={book.author} />
+                <input type="text" name="author" onChange={handleOnChange}
+                value={book.author} />
             </div>
             <div>
                 <label htmlFor="publisher">출판사명: </label>
-                <input type="text" name="publisher" onChange={handleOnChange} value={book.publisher} />
+                <input type="text" name="publisher" onChange={handleOnChange}
+                value={book.publisher} />
             </div>
             <button onClick={handleAddBookOnClick}>도서 추가</button>
 
