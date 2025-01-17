@@ -20,7 +20,7 @@ function App10(props) {
         setNum2(num1 + 100);
     }, [num1]);
 
-    useEffect(() => {
+    useEffect(() => { 
         console.log(num2);
     }, [num2]); // num2 실행
 
@@ -36,6 +36,8 @@ function App10(props) {
     const handleOnClick = () => {
         setNum1(num1 + 10);
     }
+
+    console.log("???????");
 
     return (
         <div>
