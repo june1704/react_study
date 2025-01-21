@@ -6,6 +6,12 @@ import React from 'react';
  * then, catch, finally
  * 
  * async / await
+ * async function a() {
+ * a().then 을 사용할 수 있다.
+ * }
+ * async 리턴은 Promise다.
+ * async 함수안에서만 await 가능
+ * 
  * try, catch, finally
  */
 
