@@ -1,17 +1,19 @@
 /**@jsxImportSource @emotion/react */
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import * as s from './style';
 import React, { useEffect, useState } from 'react';
 
 import { LuLogIn, LuLayoutList, LuLogOut, LuUser, LuNotebookPen, LuUserRoundPlus } from "react-icons/lu";
-import { useRecoilState } from 'recoil';
-import { authUserIdAtomState } from '../../atoms/authAtom';
+import { useSetRecoilState } from 'recoil';
+import { accessTokenAtomState, authUserIdAtomState } from '../../atoms/authAtom';
 import axios from 'axios';
 import { useQuery, useQueryClient } from 'react-query';
 
 function MainHeader(props) {
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const userId = queryClient.getQueryData(["authenticatedUserQuery"])?.data.body;
+    const setAccessToken = useSetRecoilState(accessTokenAtomState)
 
     const getUserApi = async () => {
         return await axios.get("http://localhost:8080/servlet_study_war/api/user", {
@@ -32,6 +34,14 @@ function MainHeader(props) {
             enabled: !!userId,
         }
     );
+// invalidateQueries 쿼리만료(캐시를 지움)
+    const handleLogoutOnClick = () => {
+        localStorage.removeItem("AccessToken")
+        setAccessToken(localStorage.getItem("AccessToken"));
+        queryClient.removeQueries(["authenticatedUserQuery"]);
+        //queryClient.invalidateQueries(["authenticatedUserQuery"]);
+        navigate("/signin");
+    }
 
     return (
         <div css={s.layout}>
@@ -56,14 +66,14 @@ function MainHeader(props) {
                     <ul>
                         <Link to={"/mypage"} >
                             <li>
-                                <LuUser />{getUserQuery.isLoading ? "" : getUserQuery.data.data.username}
+                                <LuUser />{getUserQuery.isLoading ? "" : getUserQuery.data.data.body.username}
                             </li>
                         </Link>
-                        <Link to={"/logout"} >
+                        <a onClick={handleLogoutOnClick} >
                             <li>
                                 <LuLogOut />로그아웃
                             </li>
-                        </Link>
+                        </a>
                     </ul>
                     :
                     <ul>
@@ -77,7 +87,7 @@ function MainHeader(props) {
                                 <LuUserRoundPlus />회원가입
                             </li>
                         </Link>
-                    </ul>    
+                    </ul>
                 }
             </div>            
         </div>
